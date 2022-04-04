@@ -238,6 +238,43 @@ namespace Kata.GildedRose.Test
 		}
 
 
+		private static object[] passAMonth =
+{
+			new object[]{ new Item { Name= "+5 Dexterity Vest", SellIn= 10, Quality = 20},-20,0 },
+			new object[]{ new Item { Name= "Aged Brie", SellIn= 2, Quality = 0},-28,50  },
+			new object[]{ new Item { Name= "Elixir of the Mongoose", SellIn= 5, Quality = 7},-25,0  },
+			new object[]{ new Item { Name= "Sulfuras, Hand of Ragnaros", SellIn= 0, Quality = 80},0,80},
+			new object[]{ new Item { Name= "Sulfuras, Hand of Ragnaros", SellIn= -1, Quality = 80},-1,80  },
+			new object[]{ new Item { Name= "Backstage passes to a TAFKAL80ETC concert", SellIn= 15, Quality = 20},-15,0 },
+			new object[]{ new Item { Name= "Backstage passes to a TAFKAL80ETC concert", SellIn= 10, Quality = 49},-20,0 },
+			new object[]{ new Item { Name= "Backstage passes to a TAFKAL80ETC concert", SellIn= 5, Quality = 49},-25,0 },
+			new object[]{ new Item { Name= "Conjured Mana Cake", SellIn= 10, Quality = 20},-20,0 },
+		};
+		[TestCaseSource("passAMonth")]
+		public void Items_GetsOld_AfterThirtyDays(Item item, int expectedSellin, int expectedQuality)
+		{
+			QualityUpdater updater = new QualityUpdater();
+
+			switch (item.Name)
+			{
+				case "Elixir of the Mongoose": updater.updateStrategy = new DefaultStrategy(); break;
+				case "Conjured Mana Cake": updater.updateStrategy = new InvokedStrategy(); break;
+				case "Aged Brie": updater.updateStrategy = new CheeseStrategy(); break;
+				case "Sulfuras, Hand of Ragnaros": return;
+				default: updater.updateStrategy = new DefaultStrategy(); break;
+			}
+
+			for(int i = 1; i <=30; i++) updater.Update(item);
+
+			Assert.AreEqual(expectedSellin, item.SellIn);
+			Assert.AreEqual(expectedQuality, item.Quality);
+
+
+		}
+
+
+
+
 
 
 		/*

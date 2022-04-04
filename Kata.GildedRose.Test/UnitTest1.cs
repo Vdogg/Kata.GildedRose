@@ -46,15 +46,35 @@ namespace Kata.GildedRose.Test
 		}
 
 
+		private static object[] ItemsRotting =
+		{
+			new object[]{ new Item { Name= "Apple", SellIn= 10, Quality = 5},4 },
+			new object[]{ new Item { Name= "Banana", SellIn= 1, Quality = 5},4 },
+			new object[]{ new Item { Name= "Raspberries", SellIn= 0, Quality = 5},3 }
+		};
+
+		/*
+		 * - Once the sell by date has passed, Quality degrades twice as fast
+		 */
+		[TestCaseSource("ItemsRotting")]
+		public void Item_GettinRotten_AfterSellinOutDated_QualityMinusTwo(Item item,int expectedQuality)
+        {
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new DefaultStrategy();
+
+			updater.Update(item);
+
+			Assert.AreEqual(expectedQuality, item.Quality);
+		}
 
 
 		/*
 		 * 
 		 * TODOLIST
 		 * 
-        - All items have a SellIn value which denotes the number of days we have to sell the item
-		- All items have a Quality value which denotes how valuable the item is
-		- At the end of each day our system lowers both values for every item
+    OK  - All items have a SellIn value which denotes the number of days we have to sell the item 
+	OK	- All items have a Quality value which denotes how valuable the item is
+	OK	- At the end of each day our system lowers both values for every item
 
 		Pretty simple, right? Well this is where it gets interesting:
 

@@ -16,7 +16,7 @@ namespace Kata.GildedRose.Test
 
             updater.updateStrategy = new DefaultStrategy();
 
-			Item sameRef = updater.UpdateQuality(apple);
+			Item sameRef = updater.Update(apple);
 
 			Assert.AreEqual(sameRef, apple);
 
@@ -38,7 +38,7 @@ namespace Kata.GildedRose.Test
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new DefaultStrategy();
 
-			updater.UpdateQuality(item);
+			updater.Update(item);
 
 			Assert.AreEqual(expectedSellin, item.SellIn);
 			Assert.AreEqual(expectedQuality, item.Quality);

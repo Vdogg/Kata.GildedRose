@@ -8,6 +8,9 @@ namespace Kata.GildedRose.Model.Strategies
     {
         public Item Update(Item item)
         {
+            item.SellIn = item.SellIn - 1;
+            item.Quality = item.Quality - 1;
+
             return item;
         }
     }

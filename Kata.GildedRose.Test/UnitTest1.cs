@@ -4,8 +4,8 @@ using NUnit.Framework;
 
 namespace Kata.GildedRose.Test
 {
-    public class Tests
-    {
+	public class Tests
+	{
 
 
 		[Test]
@@ -14,7 +14,7 @@ namespace Kata.GildedRose.Test
 			QualityUpdater updater = new QualityUpdater();
 			Item apple = new Item();
 
-            updater.updateStrategy = new DefaultStrategy();
+			updater.updateStrategy = new DefaultStrategy();
 
 			Item sameRef = updater.Update(apple);
 
@@ -33,8 +33,8 @@ namespace Kata.GildedRose.Test
 		 * - At the end of each day our system lowers both values for every item
 		 */
 		[TestCaseSource("ItemsGetsOld")]
-		public void Item_GetsOld_SellinAndQualityMinusOne(Item item,int expectedSellin,int expectedQuality)
-        {
+		public void Item_GetsOld_SellinAndQualityMinusOne(Item item, int expectedSellin, int expectedQuality)
+		{
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new DefaultStrategy();
 
@@ -57,8 +57,8 @@ namespace Kata.GildedRose.Test
 		 * - Once the sell by date has passed, Quality degrades twice as fast
 		 */
 		[TestCaseSource("ItemsRotting")]
-		public void Item_GettinRotten_AfterSellinOutDated_QualityMinusTwo(Item item,int expectedQuality)
-        {
+		public void Item_GettinRotten_AfterSellinOutDated_QualityMinusTwo(Item item, int expectedQuality)
+		{
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new DefaultStrategy();
 
@@ -81,7 +81,7 @@ namespace Kata.GildedRose.Test
 		 */
 		[TestCaseSource("ItemsNeverNegative")]
 		public void Item_GetsOld_QualityNeverNegative(Item item, int expectedQuality)
-        {
+		{
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new DefaultStrategy();
 
@@ -102,8 +102,8 @@ namespace Kata.GildedRose.Test
 		 * - "Aged Brie" actually increases in Quality the older it gets
 		 */
 		[TestCaseSource("CheesyItems")]
-		public void Cheese_gettingOld_QualityUpgrades(Item cheese,int expectedQuality)
-        {
+		public void Cheese_gettingOld_QualityUpgrades(Item cheese, int expectedQuality)
+		{
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new CheeseStrategy();
 
@@ -174,7 +174,7 @@ namespace Kata.GildedRose.Test
 		 */
 		[TestCaseSource("BackStagePassesQualityUpgrades")]
 		public void BackStagePass_GettingCloseToEvent_QualityUpgrades(Item pass, int expectedQuality)
-        {
+		{
 			QualityUpdater updater = new QualityUpdater();
 			updater.updateStrategy = new TicketingStrategy();
 
@@ -184,7 +184,25 @@ namespace Kata.GildedRose.Test
 		}
 
 
+		private static object[] ConjuredItems =
+		{
+			new object[]{ new Item { Name= "Invoked water", SellIn= 10, Quality = 50},48 },
+			new object[]{ new Item { Name= "Invoked food", SellIn= 5, Quality = 50},48 },
+			new object[]{ new Item { Name= "Invoked food", SellIn= 0, Quality = 50},46 },
+		};
 
+
+		[TestCaseSource("ConjuredItems")]
+		public void ConjuredItems_Degrades_TWiceAsFastAsNormalItems(Item item, int expectedQuality)
+		{
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new InvokedStrategy();
+
+			updater.Update(item);
+
+			Assert.AreEqual(expectedQuality, item.Quality);
+
+		}
 
 
 		/*

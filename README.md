@@ -41,3 +41,11 @@ I made the project in that way. Every feature was firstly based on a failing tes
 ### How to test it
 
 You can execute the compiled program or use the test class to test each feature.
+
+
+### What've learned
+
+Inheritance is not always the good approach. While reading how the Strategy Pattern works i found good example to explain how is it usefull.
+Also, i thank Christophger Okhravi for his videos on Youtube explaining design patterns. When i want some more explanations, i almost always fall on his videos. And it's very well done.
+
+TDD is a good think. It takes times but i'm telling you : Perhaps tests are boring. But it's still nice and rewarding to see a big bunch of tests passing. 

@@ -91,6 +91,28 @@ namespace Kata.GildedRose.Test
 		}
 
 
+
+		private static object[] CheesyItems =
+{
+			new object[]{ new Item { Name= "Brie", SellIn= 1, Quality = 9},10 },
+			new object[]{ new Item { Name= "Munster", SellIn= 0, Quality = 8},10 },
+		};
+
+		/*
+		 * - "Aged Brie" actually increases in Quality the older it gets
+		 */
+		[TestCaseSource("CheesyItems")]
+		public void Cheese_gettingOld_QualityUpgrades(Item cheese,int expectedQuality)
+        {
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new CheeseStrategy();
+
+			updater.Update(cheese);
+
+			Assert.AreEqual(expectedQuality, cheese.Quality);
+		}
+
+
 		/*
 		 * 
 		 * TODOLIST

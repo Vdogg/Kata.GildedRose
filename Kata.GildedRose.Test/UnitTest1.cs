@@ -113,6 +113,30 @@ namespace Kata.GildedRose.Test
 		}
 
 
+
+		private static object[] ItemsNeverMoreThanFifthy =
+		{
+			new object[]{ new Item { Name= "Brie", SellIn= 5, Quality = 50},50 },
+			new object[]{ new Item { Name= "Munster", SellIn= 0, Quality = 50},50 },
+		};
+		/*
+		 * - The Quality of an item is never more than 50
+		 * It seems to only concern the cheese when it's the only kind of item which gains of quality along time.
+		 * 
+		 */
+		[TestCaseSource("ItemsNeverMoreThanFifthy")]
+		public void Items_QualityNeverMoreThanFifthy(Item cheese, int expectedQuality)
+		{
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new CheeseStrategy();
+
+			updater.Update(cheese);
+
+			Assert.AreEqual(expectedQuality, cheese.Quality);
+		}
+
+
+
 		/*
 		 * 
 		 * TODOLIST

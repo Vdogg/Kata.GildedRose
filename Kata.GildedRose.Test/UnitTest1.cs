@@ -150,10 +150,20 @@ namespace Kata.GildedRose.Test
 
 		private static object[] BackStagePassesQualityUpgrades =
 {
-			new object[]{ new Item { Name= "Pass", SellIn= 30, Quality = 9},10 }
+			new object[]{ new Item { Name= "Pass", SellIn= 30, Quality = 9},10 },
+
+			new object[]{ new Item { Name= "Pass", SellIn= 9, Quality = 20},22 },
+			new object[]{ new Item { Name= "Pass", SellIn= 10, Quality = 20},22 },
+			new object[]{ new Item { Name= "Pass", SellIn= 11, Quality = 20},21 },
+
+			new object[]{ new Item { Name= "Pass", SellIn= 4, Quality = 20},23 },
+			new object[]{ new Item { Name= "Pass", SellIn= 5, Quality = 20},23 },
+			new object[]{ new Item { Name= "Pass", SellIn= 6, Quality = 20},22 },
+
 		};
 		/*
 		 * - "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+		 * - Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less 
 		 */
 		[TestCaseSource("BackStagePassesQualityUpgrades")]
 		public void BackStagePass_GettingCloseToEvent_QualityUpgrades(Item pass, int expectedQuality)

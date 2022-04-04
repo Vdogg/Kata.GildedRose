@@ -36,3 +36,8 @@ With this pattern, the point concerning the invoked food was easy. We just need 
 The discussion before the test led to consider developping with the Test Driven Development approach. The idea is simple. It's test based. For each feature we have to create a test first. A failing test.
 When it's done, i do what's needed to make it pass. Next step is a new failing test. I make it pass so as the previous one. Etc.
 I made the project in that way. Every feature was firstly based on a failing test. Now, the program done. There is 10 tests  functions with 39 test cases. All working and usefull for an eventual change in the future.
+
+
+### How to test it
+
+You can execute the compiled program or use the test class to test each feature.

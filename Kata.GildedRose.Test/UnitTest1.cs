@@ -160,10 +160,17 @@ namespace Kata.GildedRose.Test
 			new object[]{ new Item { Name= "Pass", SellIn= 5, Quality = 20},23 },
 			new object[]{ new Item { Name= "Pass", SellIn= 6, Quality = 20},22 },
 
+			new object[]{ new Item { Name= "Pass", SellIn= 2, Quality = 20},23 },
+			new object[]{ new Item { Name= "Pass", SellIn= 1, Quality = 20},23 },
+			new object[]{ new Item { Name= "Pass", SellIn= 0, Quality = 20},0 },
+
+
+
 		};
 		/*
 		 * - "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
-		 * - Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less 
+		 * - Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less
+		 * - Quality drops to 0 after the concert
 		 */
 		[TestCaseSource("BackStagePassesQualityUpgrades")]
 		public void BackStagePass_GettingCloseToEvent_QualityUpgrades(Item pass, int expectedQuality)

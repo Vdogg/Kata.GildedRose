@@ -136,6 +136,39 @@ namespace Kata.GildedRose.Test
 		}
 
 
+		/*
+		 * - "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+		 * 
+		 * This text is meaningfull because it's written that it never has to be sold.
+		 * So we don't have to affect it in any way.
+		 * Except perhaps make some protections/exceptions to prevent selling it.
+		 * But i don't like that goblin. So... Who cares ?
+		 */
+
+
+
+
+		private static object[] BackStagePassesQualityUpgrades =
+{
+			new object[]{ new Item { Name= "Pass", SellIn= 30, Quality = 9},10 }
+		};
+		/*
+		 * - "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+		 */
+		[TestCaseSource("BackStagePassesQualityUpgrades")]
+		public void BackStagePass_GettingCloseToEvent_QualityUpgrades(Item pass, int expectedQuality)
+        {
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new TicketingStrategy();
+
+			updater.Update(pass);
+
+			Assert.AreEqual(expectedQuality, pass.Quality);
+		}
+
+
+
+
 
 		/*
 		 * 

@@ -10,6 +10,12 @@ namespace Kata.GildedRose.Model.Strategies
         {
             item.SellIn = item.SellIn - 1;
 
+            if(item.SellIn < 0)
+            {
+                item.Quality = 0; //Not using MIN_QUALITY because the "0" is explicitly asked.
+                return item; 
+            }
+
             if (item.SellIn < 5)
                 item.Quality += 3;
             else if (item.SellIn < 10)

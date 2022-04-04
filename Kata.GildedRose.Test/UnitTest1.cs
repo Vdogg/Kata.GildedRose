@@ -191,7 +191,11 @@ namespace Kata.GildedRose.Test
 			new object[]{ new Item { Name= "Invoked food", SellIn= 0, Quality = 50},46 },
 		};
 
-
+		/*
+		 * - "Conjured" items degrade in Quality twice as fast as normal items
+		 * Because its comparing with normal items, 
+		 * i've decided that it also haves the "twice as fast" behaviour when the sellin value comes to 0
+		 */
 		[TestCaseSource("ConjuredItems")]
 		public void ConjuredItems_Degrades_TWiceAsFastAsNormalItems(Item item, int expectedQuality)
 		{

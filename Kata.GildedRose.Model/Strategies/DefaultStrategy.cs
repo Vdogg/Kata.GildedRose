@@ -6,7 +6,7 @@ namespace Kata.GildedRose.Model.Strategies
 {
     public class DefaultStrategy : IUpdateStrategy
     {
-        public Item update(Item item)
+        public Item Update(Item item)
         {
             return item;
         }

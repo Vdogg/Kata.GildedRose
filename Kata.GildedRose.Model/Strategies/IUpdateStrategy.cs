@@ -6,6 +6,6 @@ namespace Kata.GildedRose.Model.Strategies
 {
     public interface IUpdateStrategy
     {
-        Item update(Item item);
+        Item Update(Item item);
     }
 }

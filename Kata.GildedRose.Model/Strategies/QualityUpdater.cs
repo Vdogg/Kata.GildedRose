@@ -8,9 +8,9 @@ namespace Kata.GildedRose.Model.Strategies
     {
         public IUpdateStrategy updateStrategy;
 
-        public Item UpdateQuality(Item item)
+        public Item Update(Item item)
         {
-            return item;
+            return updateStrategy.Update(item);
         }
 
        

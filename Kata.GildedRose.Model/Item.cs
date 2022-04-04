@@ -16,4 +16,4 @@ namespace Kata.GildedRose.Model
         }
     }
 }
-}
+

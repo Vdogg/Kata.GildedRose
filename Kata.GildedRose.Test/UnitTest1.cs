@@ -209,6 +209,37 @@ namespace Kata.GildedRose.Test
 		}
 
 
+
+		private static object[] DifferentStrategies =
+		{
+			new object[]{ new Item { Name= "Aged Brie", SellIn= 10, Quality = 30}, new CheeseStrategy() },
+			new object[]{ new Item { Name= "Conjured Mana Cake", SellIn= 5, Quality = 50}, new InvokedStrategy() },
+			new object[]{ new Item { Name= "Sulfuras, Hand of Ragnaros", SellIn= 0, Quality = 50}, null },
+			new object[]{ new Item { Name= "Elixir of the Mongoose", SellIn= 0, Quality = 50}, new DefaultStrategy() },
+			new object[]{ new Item { Name= "Apple", SellIn= 0, Quality = 50}, new DefaultStrategy() },
+		};
+		[TestCaseSource("DifferentStrategies")]
+		public void Strategy_Selection(Item item, IUpdateStrategy expectedStrategy)
+        {
+			QualityUpdater updater = new QualityUpdater();
+
+            switch (item.Name)
+            {
+				case "Elixir of the Mongoose": updater.updateStrategy = new DefaultStrategy(); break;
+				case "Conjured Mana Cake": updater.updateStrategy = new InvokedStrategy(); break;
+				case "Aged Brie": updater.updateStrategy = new CheeseStrategy(); break;
+				case "Sulfuras, Hand of Ragnaros": return;
+				default: updater.updateStrategy = new DefaultStrategy(); break;
+			}
+
+			updater.Update(item);
+			Assert.AreEqual(expectedStrategy.GetType(), updater.updateStrategy.GetType());
+
+		}
+
+
+
+
 		/*
 		 * 
 		 * TODOLIST

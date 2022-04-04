@@ -12,11 +12,10 @@ namespace Kata.GildedRose.Model.Strategies
 
             item.Quality = item.SellIn >= 0 ?
                 item.Quality <= 0 ?
-                    0 : item.Quality - 1 
+                    QualityUpdater.MIN_QUALITY : item.Quality - 1 
             :
                 item.Quality <= 1 ?
-                    0 : item.Quality - 2;
-
+                    QualityUpdater.MIN_QUALITY : item.Quality - 2;
 
             return item;
         }

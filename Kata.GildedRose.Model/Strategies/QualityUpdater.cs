@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kata.GildedRose.Model.Strategies
 {
-    class QualityUpdater
+    public class QualityUpdater
     {
         public IUpdateStrategy updateStrategy;
 

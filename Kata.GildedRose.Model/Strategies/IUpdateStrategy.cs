@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Kata.GildedRose.Model.Strategies
 {
-    interface IUpdateStrategy
+    public interface IUpdateStrategy
     {
         Item update(Item item);
     }

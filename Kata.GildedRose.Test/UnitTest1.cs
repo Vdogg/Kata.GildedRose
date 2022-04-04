@@ -1,4 +1,5 @@
 using Kata.GildedRose.Model;
+using Kata.GildedRose.Model.Strategies;
 using NUnit.Framework;
 
 namespace Kata.GildedRose.Test
@@ -7,6 +8,19 @@ namespace Kata.GildedRose.Test
     {
 
 
+		[Test]
+		public void BasicStrategy_ReturnsItem()
+		{
+			QualityUpdater updater = new QualityUpdater();
+			Item apple = new Item();
+
+            updater.updateStrategy = new DefaultStrategy();
+
+			Item sameRef = updater.UpdateQuality(apple);
+
+			Assert.AreEqual(sameRef, apple);
+
+		}
 
 
 

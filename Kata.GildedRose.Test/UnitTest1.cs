@@ -68,6 +68,29 @@ namespace Kata.GildedRose.Test
 		}
 
 
+		private static object[] ItemsNeverNegative =
+		{
+			new object[]{ new Item { Name= "Apple", SellIn= 10, Quality = 5},4 },
+			new object[]{ new Item { Name= "Banana", SellIn= 1, Quality = 0},0 },
+			new object[]{ new Item { Name= "Raspberries", SellIn= 0, Quality = 0},0 }
+		};
+
+
+		/*
+		 * - The Quality of an item is never negative
+		 */
+		[TestCaseSource("ItemsNeverNegative")]
+		public void Item_GetsOld_QualityNeverNegative(Item item, int expectedQuality)
+        {
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new DefaultStrategy();
+
+			updater.Update(item);
+
+			Assert.AreEqual(expectedQuality, item.Quality);
+		}
+
+
 		/*
 		 * 
 		 * TODOLIST

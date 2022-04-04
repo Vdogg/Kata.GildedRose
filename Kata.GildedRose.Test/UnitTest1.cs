@@ -25,6 +25,26 @@ namespace Kata.GildedRose.Test
 
 
 
+		private static object[] ItemsGetsOld =
+		{
+			new object[]{ new Item { Name= "Apple", SellIn= 10, Quality = 5},9,4 }
+		};
+		/*
+		 * - At the end of each day our system lowers both values for every item
+		 */
+		[TestCaseSource("ItemsGetsOld")]
+		public void Item_GetsOld_SellinAndQualityMinusOne(Item item,int expectedSellin,int expectedQuality)
+        {
+			QualityUpdater updater = new QualityUpdater();
+			updater.updateStrategy = new DefaultStrategy();
+
+			updater.UpdateQuality(item);
+
+			Assert.AreEqual(expectedSellin, item.SellIn);
+			Assert.AreEqual(expectedQuality, item.Quality);
+
+		}
+
 
 
 
